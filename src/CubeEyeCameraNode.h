@@ -1,6 +1,12 @@
 #ifndef CUBEEYE_CAMERA_NODE_H_
 #define CUBEEYE_CAMERA_NODE_H_
 
+#include <atomic>
+#include <mutex>
+#include <thread>
+
+#include <sensor_msgs/msg/point_cloud2.hpp>
+
 class CameraModule;
 
 class CubeEyeCameraNode : public rclcpp::Node
@@ -13,11 +19,15 @@ public:
     bool shutdown();
 
     void autorun(std::string serialNumber, uint32_t frameType);
-    
+
+    // frame-liveness watchdog (self-heal): self-shutdown when frames stall so a
+    // launch with respawn=True restarts the node.
+    void topic_check(bool node_start_check);
+
 protected:
-    void getLastStateServiceCallback(const std::shared_ptr<cubeeye_camera::srv::LastState::Request> request, 
+    void getLastStateServiceCallback(const std::shared_ptr<cubeeye_camera::srv::LastState::Request> request,
                                     std::shared_ptr<cubeeye_camera::srv::LastState::Response> response);
-    void getLastErrorServiceCallback(const std::shared_ptr<cubeeye_camera::srv::LastError::Request> request, 
+    void getLastErrorServiceCallback(const std::shared_ptr<cubeeye_camera::srv::LastError::Request> request,
                                     std::shared_ptr<cubeeye_camera::srv::LastError::Response> response);
     void getScanServiceCallback(const std::shared_ptr<cubeeye_camera::srv::Scan::Request> request,
                                     std::shared_ptr<cubeeye_camera::srv::Scan::Response> response);
@@ -29,6 +39,9 @@ protected:
                                     std::shared_ptr<cubeeye_camera::srv::Stop::Response> response);
     void getDisconnectServiceCallback(const std::shared_ptr<cubeeye_camera::srv::Disconnect::Request> request,
                                         std::shared_ptr<cubeeye_camera::srv::Disconnect::Response> response);
+
+    void msg_check_Callback(const sensor_msgs::msg::PointCloud2::SharedPtr msg);
+    void node_killer();
 
 private:
     rclcpp::Logger mLogger;
@@ -42,6 +55,14 @@ private:
     rclcpp::Service<cubeeye_camera::srv::Disconnect>::SharedPtr mDisconnectService;
 
     std::shared_ptr<CameraModule> mCamera;
+
+    // frame-liveness watchdog state
+    std::mutex mtx;
+    bool msg_live_check = true;
+    rclcpp::Time mLastMsgTime;
+    rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr mPointsSub;
+    std::thread mTopicCheckThread;
+    std::atomic<bool> mTopicCheckStop{false};
 };
 
 
