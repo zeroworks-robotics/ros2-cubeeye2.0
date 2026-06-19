@@ -63,8 +63,8 @@ class _CubeEyePythonSink(cu.Sink):
                         _f32_data_z_arr = np.ctypeslib.as_array(_f32_data_z_ptr)
 
                         _cur_pcl_x_data = np.array(_f32_data_x_arr)
-                        _cur_pcl_y_data = np.array(_f32_data_y_arr)
-                        _cur_pcl_z_data = np.array(_f32_data_z_arr)
+                        _cur_pcl_y_data = np.negative(np.array(_f32_data_y_arr))
+                        _cur_pcl_z_data = np.negative(np.array(_f32_data_z_arr))
 
                         _o3d_vis_lock.release()
                         _o3d_vis_evt.set()
@@ -159,7 +159,7 @@ if __name__ == "__main__":
         _xyz_coordinate = np.transpose(np.vstack((_cur_pcl_x_data, _cur_pcl_y_data, _cur_pcl_z_data)))
 
         _o3d_vis_lock.release()
-        _o3d_pcl.points = o3d.utility.Vector3dVector(np.negative(_xyz_coordinate))
+        _o3d_pcl.points = o3d.utility.Vector3dVector(_xyz_coordinate)
 
         if _o3d_vis_first_pcl_frame is True:
             _o3d_vis_first_pcl_frame = False
