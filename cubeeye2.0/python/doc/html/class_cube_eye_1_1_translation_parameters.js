@@ -1,6 +1,6 @@
 var class_cube_eye_1_1_translation_parameters =
 [
-    [ "__init__", "class_cube_eye_1_1_translation_parameters.html#a112243144f85c3edc549c44f3eca5b56", null ],
-    [ "__repr__", "class_cube_eye_1_1_translation_parameters.html#a7e2f1b966b9712a7855b877cdd8008c6", null ],
-    [ "to_string", "class_cube_eye_1_1_translation_parameters.html#ad02fdd76ad636b06a87c66357eee15a7", null ]
+    [ "__init__", "class_cube_eye_1_1_translation_parameters.html#a3735b259eeb5a77f883e6d775617baf7", null ],
+    [ "__repr__", "class_cube_eye_1_1_translation_parameters.html#a70fe18c43ef438dd935d985f2fd61086", null ],
+    [ "to_string", "class_cube_eye_1_1_translation_parameters.html#a7ef5644880933b3bac4ab98bcc06b21e", null ]
 ];

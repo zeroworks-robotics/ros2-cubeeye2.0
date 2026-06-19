@@ -165,40 +165,40 @@
 /* #undef HAVE_CTERMID_R */
 
 /* Define if you have the 'filter' function. */
-#define HAVE_CURSES_FILTER 1
+/* #undef HAVE_CURSES_FILTER */
 
 /* Define to 1 if you have the <curses.h> header file. */
-#define HAVE_CURSES_H 1
+/* #undef HAVE_CURSES_H */
 
 /* Define if you have the 'has_key' function. */
-#define HAVE_CURSES_HAS_KEY 1
+/* #undef HAVE_CURSES_HAS_KEY */
 
 /* Define if you have the 'immedok' function. */
-#define HAVE_CURSES_IMMEDOK 1
+/* #undef HAVE_CURSES_IMMEDOK */
 
 /* Define if you have the 'is_pad' function or macro. */
-#define HAVE_CURSES_IS_PAD 1
+/* #undef HAVE_CURSES_IS_PAD */
 
 /* Define if you have the 'is_term_resized' function. */
-#define HAVE_CURSES_IS_TERM_RESIZED 1
+/* #undef HAVE_CURSES_IS_TERM_RESIZED */
 
 /* Define if you have the 'resizeterm' function. */
-#define HAVE_CURSES_RESIZETERM 1
+/* #undef HAVE_CURSES_RESIZETERM */
 
 /* Define if you have the 'resize_term' function. */
-#define HAVE_CURSES_RESIZE_TERM 1
+/* #undef HAVE_CURSES_RESIZE_TERM */
 
 /* Define if you have the 'syncok' function. */
-#define HAVE_CURSES_SYNCOK 1
+/* #undef HAVE_CURSES_SYNCOK */
 
 /* Define if you have the 'typeahead' function. */
-#define HAVE_CURSES_TYPEAHEAD 1
+/* #undef HAVE_CURSES_TYPEAHEAD */
 
 /* Define if you have the 'use_env' function. */
-#define HAVE_CURSES_USE_ENV 1
+/* #undef HAVE_CURSES_USE_ENV */
 
 /* Define if you have the 'wchgat' function. */
-#define HAVE_CURSES_WCHGAT 1
+/* #undef HAVE_CURSES_WCHGAT */
 
 /* Define to 1 if you have the declaration of `isfinite', and to 0 if you
    don't. */
@@ -603,7 +603,7 @@
 #define HAVE_LIBINTL_H 1
 
 /* Define if you have the readline library (-lreadline). */
-#define HAVE_LIBREADLINE 1
+/* #undef HAVE_LIBREADLINE */
 
 /* Define to 1 if you have the `resolv' library (-lresolv). */
 /* #undef HAVE_LIBRESOLV */
@@ -711,7 +711,7 @@
 #define HAVE_MREMAP 1
 
 /* Define to 1 if you have the <ncurses.h> header file. */
-#define HAVE_NCURSES_H 1
+/* #undef HAVE_NCURSES_H */
 
 /* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
 /* #undef HAVE_NDIR_H */
@@ -834,28 +834,28 @@
 #define HAVE_RENAMEAT 1
 
 /* Define if readline supports append_history */
-#define HAVE_RL_APPEND_HISTORY 1
+/* #undef HAVE_RL_APPEND_HISTORY */
 
 /* Define if you can turn off readline's signal handling. */
-#define HAVE_RL_CATCH_SIGNAL 1
+/* #undef HAVE_RL_CATCH_SIGNAL */
 
 /* Define if you have readline 2.2 */
-#define HAVE_RL_COMPLETION_APPEND_CHARACTER 1
+/* #undef HAVE_RL_COMPLETION_APPEND_CHARACTER */
 
 /* Define if you have readline 4.0 */
-#define HAVE_RL_COMPLETION_DISPLAY_MATCHES_HOOK 1
+/* #undef HAVE_RL_COMPLETION_DISPLAY_MATCHES_HOOK */
 
 /* Define if you have readline 4.2 */
-#define HAVE_RL_COMPLETION_MATCHES 1
+/* #undef HAVE_RL_COMPLETION_MATCHES */
 
 /* Define if you have rl_completion_suppress_append */
-#define HAVE_RL_COMPLETION_SUPPRESS_APPEND 1
+/* #undef HAVE_RL_COMPLETION_SUPPRESS_APPEND */
 
 /* Define if you have readline 4.0 */
-#define HAVE_RL_PRE_INPUT_HOOK 1
+/* #undef HAVE_RL_PRE_INPUT_HOOK */
 
 /* Define if you have readline 4.0 */
-#define HAVE_RL_RESIZE_TERMINAL 1
+/* #undef HAVE_RL_RESIZE_TERMINAL */
 
 /* Define to 1 if you have the `round' function. */
 #define HAVE_ROUND 1
@@ -1224,7 +1224,7 @@
 #define HAVE_TERMIOS_H 1
 
 /* Define to 1 if you have the <term.h> header file. */
-#define HAVE_TERM_H 1
+/* #undef HAVE_TERM_H */
 
 /* Define to 1 if you have the `tgamma' function. */
 #define HAVE_TGAMMA 1
@@ -1354,7 +1354,7 @@
 #define MAJOR_IN_SYSMACROS 1
 
 /* Define if mvwdelch in curses.h is an expression. */
-#define MVWDELCH_IS_EXPRESSION 1
+/* #undef MVWDELCH_IS_EXPRESSION */
 
 /* Define to the address where bug reports for this package should be sent. */
 /* #undef PACKAGE_BUGREPORT */
@@ -1520,7 +1520,7 @@
 
 
 /* Define if WINDOW in curses.h offers a field _flags. */
-#define WINDOW_HAS_FLAGS 1
+/* #undef WINDOW_HAS_FLAGS */
 
 /* Define if you want build the _decimal module using a coroutine-local rather
    than a thread-local context */

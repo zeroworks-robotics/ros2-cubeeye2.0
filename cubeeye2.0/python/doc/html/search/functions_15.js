@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['width_562',['width',['../class_cube_eye_1_1_frame.html#a2afbbf46db461b1d593481a8cd906801',1,'CubeEye::Frame']]]
+  ['width_0',['width',['../class_cube_eye_1_1_frame.html#afa6a83dabcab522a576daf9a69b370c4',1,'CubeEye::Frame']]]
 ];

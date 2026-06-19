@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['introduction_710',['Introduction',['../index.html',1,'']]]
+  ['examples_0',['How to run CubeEye Examples',['../cubeeyeshell.html',1,'']]]
 ];

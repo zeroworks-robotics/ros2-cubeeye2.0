@@ -4,7 +4,7 @@ project(cubeeye_camera)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -18,6 +18,12 @@ find_package(cv_bridge REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -32,6 +38,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/cubeeye2.0/include/CubeEye
+  ${OpenCV_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
 )
 
 link_directories(
@@ -56,11 +64,16 @@ ament_target_dependencies(${PROJECT_NAME}_node
    std_srvs
    std_msgs
    sensor_msgs
+   geometry_msgs
+   tf2
+   tf2_ros
+   tf2_geometry_msgs
 )
 
 target_link_libraries(${PROJECT_NAME}_node
-  "${cpp_typesupport_target}"  
+  "${cpp_typesupport_target}"
   CubeEye
+  ${OpenCV_LIBRARIES}
 )
 
 # Use old RPATH. 
