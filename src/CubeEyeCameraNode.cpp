@@ -49,6 +49,11 @@ void CubeEyeCameraNode::init()
                             std::bind(&CubeEyeCameraNode::getStopServiceCallback, this, std::placeholders::_1, std::placeholders::_2));
     mDisconnectService = create_service<cubeeye_camera::srv::Disconnect>("~/disconnect",
                             std::bind(&CubeEyeCameraNode::getDisconnectServiceCallback, this, std::placeholders::_1, std::placeholders::_2));
+
+    // Declare the watchdog param here (before any connect/autorun → before
+    // ModelParameter::addTo registers its param-rejecting on-set callback).
+    if (!has_parameter("msg_live_check_time"))
+        declare_parameter("msg_live_check_time", 10);
 }
 
 void CubeEyeCameraNode::getLastStateServiceCallback(

@@ -230,15 +230,12 @@ void CameraModule::shutdown() {
 void CameraModule::connectTo(rclcpp::Node* node) {
     mNode = node;
 
-    // initialize model
-    RCLCPP_INFO(mLogger, "make model parameter (%s)", mCamera->source()->name().c_str());
-    mModelParams = ModelParameter::create(mCamera);
-    if (mModelParams != nullptr) {
-        mModelParams->addTo(node);
-    }
-
-    // Declare conversion params ONCE (rclcpp throws ParameterAlreadyDeclared on re-declare;
-    // connectTo may be re-entered after a disconnect, so guard with has_parameter()).
+    // Declare conversion params ONCE, BEFORE ModelParameter::addTo() registers its
+    // on_set_parameters_callback. That callback rejects any parameter not in the
+    // model's descriptor list, and rclcpp invokes every registered on-set callback
+    // at declare_parameter() time — so declaring frame_id/draw/padding AFTER addTo
+    // would be rejected ("parameter (frame_id) is not defined") and crash the node.
+    // (Guard with has_parameter(): connectTo may be re-entered after a disconnect.)
     if (!node->has_parameter("frame_id"))      node->declare_parameter("frame_id", std::string("pcl"));
     if (!node->has_parameter("draw"))          node->declare_parameter("draw", draw);
     if (!node->has_parameter("right_padding")) node->declare_parameter("right_padding", right_padding);
@@ -247,6 +244,13 @@ void CameraModule::connectTo(rclcpp::Node* node) {
     draw          = node->get_parameter("draw").as_bool();
     right_padding = (int)node->get_parameter("right_padding").as_int();
     left_padding  = (int)node->get_parameter("left_padding").as_int();
+
+    // initialize model (registers the param-rejecting callback — must come AFTER our declares)
+    RCLCPP_INFO(mLogger, "make model parameter (%s)", mCamera->source()->name().c_str());
+    mModelParams = ModelParameter::create(mCamera);
+    if (mModelParams != nullptr) {
+        mModelParams->addTo(node);
+    }
 
     // tf2 buffer/listener need the node clock; the listener spins its own thread.
     if (!mTfBuffer) {
