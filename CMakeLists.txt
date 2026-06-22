@@ -95,5 +95,19 @@ install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}/
 )
 
+# 벤더 SDK 공유 라이브러리 설치 (libCubeEye + 동봉 thirdparty: libusb/ffmpeg/live555/opencv3.4).
+# link_directories 로 빌드 시 링크만 하고 install 을 안 하면 merge-install(.deb)에 .so 가
+# 빠져 런타임 로드 실패한다(= symlink-install 로만 우연히 동작). lib/ 에 설치하면
+# ament library_path 훅이 <prefix>/lib 를 LD_LIBRARY_PATH 에 추가 → 정상 로드 + self-contained deb.
+install(DIRECTORY
+    ${CMAKE_CURRENT_SOURCE_DIR}/cubeeye2.0/lib/
+    ${CMAKE_CURRENT_SOURCE_DIR}/cubeeye2.0/thirdparty/libusb/lib/
+    ${CMAKE_CURRENT_SOURCE_DIR}/cubeeye2.0/thirdparty/libffmpeg/lib/
+    ${CMAKE_CURRENT_SOURCE_DIR}/cubeeye2.0/thirdparty/liblive555/lib/Release/
+    ${CMAKE_CURRENT_SOURCE_DIR}/cubeeye2.0/thirdparty/libopencv/lib/
+  DESTINATION lib
+  FILES_MATCHING PATTERN "*.so*"
+)
+
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()
