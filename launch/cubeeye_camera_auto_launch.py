@@ -12,9 +12,9 @@ def generate_launch_description():
     frametype = LaunchConfiguration("frametype")
 
     # connect a camera with its serial number
-    serialnumber_arg = DeclareLaunchArgument('autorun_serialnumber', default_value='nntab005098108')
+    serialnumber_arg = DeclareLaunchArgument('serialnumber', default_value='nntab005098108')
     # run amplitude and depth by default
-    frametype_arg = DeclareLaunchArgument('autorun_frametype', default_value='6')
+    frametype_arg = DeclareLaunchArgument('frametype', default_value='6')
 
     cubeeye_node = Node(
         package='cubeeye_camera',

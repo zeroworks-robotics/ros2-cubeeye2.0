@@ -95,6 +95,12 @@ install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}/
 )
 
+# Install scripts (e.g. cube_eye_serial_ck.sh).
+install(PROGRAMS
+  scripts/cube_eye_serial_ck.sh
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 # 벤더 SDK 공유 라이브러리 설치 (libCubeEye + 동봉 thirdparty: libusb/ffmpeg/live555/opencv3.4).
 # link_directories 로 빌드 시 링크만 하고 install 을 안 하면 merge-install(.deb)에 .so 가
 # 빠져 런타임 로드 실패한다(= symlink-install 로만 우연히 동작). lib/ 에 설치하면
